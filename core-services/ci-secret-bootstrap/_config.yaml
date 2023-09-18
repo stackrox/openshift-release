@@ -13,6 +13,7 @@ cluster_groups:
   - build08
   - multi01
   - vsphere
+  - vsphere02
   non_app_ci:
   - arm01
   - build01
@@ -23,6 +24,7 @@ cluster_groups:
   - build08
   - multi01
   - vsphere
+  - vsphere02
   non_app_ci_arm:
   - arm01
   non_osd_x86:
@@ -906,7 +908,7 @@ secret_configs:
     namespace: ci
   - cluster_groups:
     - non_app_ci
-    name: cluster-secrets-aws-chaos
+    name: aws-chaos
     namespace: ci
 - from:
     pull-secret:
@@ -2008,10 +2010,6 @@ secret_configs:
     - non_app_ci
     name: cluster-secrets-azurestack-qe
     namespace: ci
-  - cluster_groups:
-    - non_app_ci
-    name: cluster-secrets-azure-marketplace-qe
-    namespace: ci
 - from:
     osServicePrincipal.json:
       field: osServicePrincipal.json
@@ -2434,12 +2432,6 @@ secret_configs:
     sa.crier.arm01.token.txt:
       field: sa.crier.arm01.token.txt
       item: build_farm
-    sa.crier.build01.config:
-      field: sa.crier.build01.config
-      item: build_farm
-    sa.crier.build01.token.txt:
-      field: sa.crier.build01.token.txt
-      item: build_farm
     sa.crier.build02.config:
       field: sa.crier.build02.config
       item: build_farm
@@ -2482,6 +2474,12 @@ secret_configs:
     sa.crier.vsphere.token.txt:
       field: sa.crier.vsphere.token.txt
       item: build_farm
+    sa.crier.vsphere02.config:
+      field: sa.crier.vsphere02.config
+      item: build_farm
+    sa.crier.vsphere02.token.txt:
+      field: sa.crier.vsphere02.token.txt
+      item: build_farm
   to:
   - cluster: app.ci
     name: crier
@@ -2492,9 +2490,6 @@ secret_configs:
       item: config-updater
     sa.config-updater.arm01.config:
       field: sa.config-updater.arm01.config
-      item: config-updater
-    sa.config-updater.build01.config:
-      field: sa.config-updater.build01.config
       item: config-updater
     sa.config-updater.build02.config:
       field: sa.config-updater.build02.config
@@ -2520,6 +2515,9 @@ secret_configs:
     sa.config-updater.vsphere.config:
       field: sa.config-updater.vsphere.config
       item: config-updater
+    sa.config-updater.vsphere02.config:
+      field: sa.config-updater.vsphere02.config
+      item: config-updater
   to:
   - cluster: app.ci
     name: config-updater
@@ -2539,12 +2537,6 @@ secret_configs:
       item: build_farm
     sa.deck.arm01.token.txt:
       field: sa.deck.arm01.token.txt
-      item: build_farm
-    sa.deck.build01.config:
-      field: sa.deck.build01.config
-      item: build_farm
-    sa.deck.build01.token.txt:
-      field: sa.deck.build01.token.txt
       item: build_farm
     sa.deck.build02.config:
       field: sa.deck.build02.config
@@ -2588,6 +2580,12 @@ secret_configs:
     sa.deck.vsphere.token.txt:
       field: sa.deck.vsphere.token.txt
       item: build_farm
+    sa.deck.vsphere02.config:
+      field: sa.deck.vsphere02.config
+      item: build_farm
+    sa.deck.vsphere02.token.txt:
+      field: sa.deck.vsphere02.token.txt
+      item: build_farm
   to:
   - cluster: app.ci
     name: deck
@@ -2604,12 +2602,6 @@ secret_configs:
       item: build_farm
     sa.hook.arm01.token.txt:
       field: sa.hook.arm01.token.txt
-      item: build_farm
-    sa.hook.build01.config:
-      field: sa.hook.build01.config
-      item: build_farm
-    sa.hook.build01.token.txt:
-      field: sa.hook.build01.token.txt
       item: build_farm
     sa.hook.build02.config:
       field: sa.hook.build02.config
@@ -2653,6 +2645,12 @@ secret_configs:
     sa.hook.vsphere.token.txt:
       field: sa.hook.vsphere.token.txt
       item: build_farm
+    sa.hook.vsphere02.config:
+      field: sa.hook.vsphere02.config
+      item: build_farm
+    sa.hook.vsphere02.token.txt:
+      field: sa.hook.vsphere02.token.txt
+      item: build_farm
   to:
   - cluster: app.ci
     name: hook
@@ -2669,12 +2667,6 @@ secret_configs:
       item: build_farm
     sa.prow-controller-manager.arm01.token.txt:
       field: sa.prow-controller-manager.arm01.token.txt
-      item: build_farm
-    sa.prow-controller-manager.build01.config:
-      field: sa.prow-controller-manager.build01.config
-      item: build_farm
-    sa.prow-controller-manager.build01.token.txt:
-      field: sa.prow-controller-manager.build01.token.txt
       item: build_farm
     sa.prow-controller-manager.build02.config:
       field: sa.prow-controller-manager.build02.config
@@ -2718,17 +2710,17 @@ secret_configs:
     sa.prow-controller-manager.vsphere.token.txt:
       field: sa.prow-controller-manager.vsphere.token.txt
       item: build_farm
+    sa.prow-controller-manager.vsphere02.config:
+      field: sa.prow-controller-manager.vsphere02.config
+      item: build_farm
+    sa.prow-controller-manager.vsphere02.token.txt:
+      field: sa.prow-controller-manager.vsphere02.token.txt
+      item: build_farm
   to:
   - cluster: app.ci
     name: prow-controller-manager
     namespace: ci
 - from:
-    sa.sprint-automation.build01.config:
-      field: sa.sprint-automation.build01.config
-      item: build_farm
-    sa.sprint-automation.build01.token.txt:
-      field: sa.sprint-automation.build01.token.txt
-      item: build_farm
     sa.sprint-automation.build02.config:
       field: sa.sprint-automation.build02.config
       item: build_farm
@@ -2751,12 +2743,6 @@ secret_configs:
       item: build_farm
     sa.sinker.arm01.token.txt:
       field: sa.sinker.arm01.token.txt
-      item: build_farm
-    sa.sinker.build01.config:
-      field: sa.sinker.build01.config
-      item: build_farm
-    sa.sinker.build01.token.txt:
-      field: sa.sinker.build01.token.txt
       item: build_farm
     sa.sinker.build02.config:
       field: sa.sinker.build02.config
@@ -2800,6 +2786,12 @@ secret_configs:
     sa.sinker.vsphere.token.txt:
       field: sa.sinker.vsphere.token.txt
       item: build_farm
+    sa.sinker.vsphere02.config:
+      field: sa.sinker.vsphere02.config
+      item: build_farm
+    sa.sinker.vsphere02.token.txt:
+      field: sa.sinker.vsphere02.token.txt
+      item: build_farm
   to:
   - cluster: app.ci
     name: sinker
@@ -2810,12 +2802,6 @@ secret_configs:
       item: build_farm
     sa.dptp-controller-manager.arm01.token.txt:
       field: sa.dptp-controller-manager.arm01.token.txt
-      item: build_farm
-    sa.dptp-controller-manager.build01.config:
-      field: sa.dptp-controller-manager.build01.config
-      item: build_farm
-    sa.dptp-controller-manager.build01.token.txt:
-      field: sa.dptp-controller-manager.build01.token.txt
       item: build_farm
     sa.dptp-controller-manager.build02.config:
       field: sa.dptp-controller-manager.build02.config
@@ -2859,17 +2845,17 @@ secret_configs:
     sa.dptp-controller-manager.vsphere.token.txt:
       field: sa.dptp-controller-manager.vsphere.token.txt
       item: build_farm
+    sa.dptp-controller-manager.vsphere02.config:
+      field: sa.dptp-controller-manager.vsphere02.config
+      item: build_farm
+    sa.dptp-controller-manager.vsphere02.token.txt:
+      field: sa.dptp-controller-manager.vsphere02.token.txt
+      item: build_farm
   to:
   - cluster: app.ci
     name: dptp-controller-manager
     namespace: ci
 - from:
-    sa.promoted-image-governor.build01.config:
-      field: sa.promoted-image-governor.build01.config
-      item: build_farm
-    sa.promoted-image-governor.build01.token.txt:
-      field: sa.promoted-image-governor.build01.token.txt
-      item: build_farm
     sa.promoted-image-governor.build02.config:
       field: sa.promoted-image-governor.build02.config
       item: build_farm
@@ -2912,6 +2898,12 @@ secret_configs:
     sa.promoted-image-governor.vsphere.token.txt:
       field: sa.promoted-image-governor.vsphere.token.txt
       item: build_farm
+    sa.promoted-image-governor.vsphere02.config:
+      field: sa.promoted-image-governor.vsphere02.config
+      item: build_farm
+    sa.promoted-image-governor.vsphere02.token.txt:
+      field: sa.promoted-image-governor.vsphere02.token.txt
+      item: build_farm
   to:
   - cluster: app.ci
     name: promoted-image-governor
@@ -2934,12 +2926,6 @@ secret_configs:
       item: build_farm
     sa.ci-operator.arm01.token.txt:
       field: sa.ci-operator.arm01.token.txt
-      item: build_farm
-    sa.ci-operator.build01.config:
-      field: sa.ci-operator.build01.config
-      item: build_farm
-    sa.ci-operator.build01.token.txt:
-      field: sa.ci-operator.build01.token.txt
       item: build_farm
     sa.ci-operator.build02.config:
       field: sa.ci-operator.build02.config
@@ -2983,6 +2969,12 @@ secret_configs:
     sa.ci-operator.vsphere.token.txt:
       field: sa.ci-operator.vsphere.token.txt
       item: build_farm
+    sa.ci-operator.vsphere02.config:
+      field: sa.ci-operator.vsphere02.config
+      item: build_farm
+    sa.ci-operator.vsphere02.token.txt:
+      field: sa.ci-operator.vsphere02.token.txt
+      item: build_farm
     sa.pj-rehearse.app.ci.config:
       field: sa.pj-rehearse.app.ci.config
       item: build_farm
@@ -3000,12 +2992,6 @@ secret_configs:
       item: ci-chat-bot
     sa.ci-chat-bot.arm01.token.txt:
       field: sa.ci-chat-bot.arm01.token.txt
-      item: ci-chat-bot
-    sa.ci-chat-bot.build01.config:
-      field: sa.ci-chat-bot.build01.config
-      item: ci-chat-bot
-    sa.ci-chat-bot.build01.token.txt:
-      field: sa.ci-chat-bot.build01.token.txt
       item: ci-chat-bot
     sa.ci-chat-bot.build02.config:
       field: sa.ci-chat-bot.build02.config
@@ -3049,6 +3035,12 @@ secret_configs:
     sa.ci-chat-bot.vsphere.token.txt:
       field: sa.ci-chat-bot.vsphere.token.txt
       item: ci-chat-bot
+    sa.ci-chat-bot.vsphere02.config:
+      field: sa.ci-chat-bot.vsphere02.config
+      item: ci-chat-bot
+    sa.ci-chat-bot.vsphere02.token.txt:
+      field: sa.ci-chat-bot.vsphere02.token.txt
+      item: ci-chat-bot
     sa.hypershift-workload.hive.config:
       field: sa.hypershift-workload.hive.config
       item: build_farm
@@ -3065,12 +3057,6 @@ secret_configs:
       item: build_farm
     sa.github-ldap-user-group-creator.arm01.token.txt:
       field: sa.github-ldap-user-group-creator.arm01.token.txt
-      item: build_farm
-    sa.github-ldap-user-group-creator.build01.config:
-      field: sa.github-ldap-user-group-creator.build01.config
-      item: build_farm
-    sa.github-ldap-user-group-creator.build01.token.txt:
-      field: sa.github-ldap-user-group-creator.build01.token.txt
       item: build_farm
     sa.github-ldap-user-group-creator.build02.config:
       field: sa.github-ldap-user-group-creator.build02.config
@@ -3119,6 +3105,12 @@ secret_configs:
       item: build_farm
     sa.github-ldap-user-group-creator.vsphere.token.txt:
       field: sa.github-ldap-user-group-creator.vsphere.token.txt
+      item: build_farm
+    sa.github-ldap-user-group-creator.vsphere02.config:
+      field: sa.github-ldap-user-group-creator.vsphere02.config
+      item: build_farm
+    sa.github-ldap-user-group-creator.vsphere02.token.txt:
+      field: sa.github-ldap-user-group-creator.vsphere02.token.txt
       item: build_farm
   to:
   - cluster: app.ci
@@ -3542,6 +3534,10 @@ secret_configs:
       - auth_field: token_image-puller_app.ci_reg_auth_value.txt
         item: build_farm
         registry_url: registry.ci.openshift.org
+      - auth_field: auth
+        email_field: email
+        item: quay.io-pull-secret
+        registry_url: quay.io
   to:
   - cluster: arm01
     name: registry-pull-credentials
@@ -4085,12 +4081,6 @@ secret_configs:
     sa.cluster-display.arm01.token.txt:
       field: sa.cluster-display.arm01.token.txt
       item: build_farm
-    sa.cluster-display.build01.config:
-      field: sa.cluster-display.build01.config
-      item: build_farm
-    sa.cluster-display.build01.token.txt:
-      field: sa.cluster-display.build01.token.txt
-      item: build_farm
     sa.cluster-display.build02.config:
       field: sa.cluster-display.build02.config
       item: build_farm
@@ -4138,6 +4128,12 @@ secret_configs:
       item: build_farm
     sa.cluster-display.vsphere.token.txt:
       field: sa.cluster-display.vsphere.token.txt
+      item: build_farm
+    sa.cluster-display.vsphere02.config:
+      field: sa.cluster-display.vsphere02.config
+      item: build_farm
+    sa.cluster-display.vsphere02.token.txt:
+      field: sa.cluster-display.vsphere02.token.txt
       item: build_farm
   to:
   - cluster: app.ci
@@ -4995,6 +4991,94 @@ secret_configs:
   - cluster: build08
     name: ci-operator
     namespace: test-credentials
+- from:
+    sa.ci-images-mirror.app.ci.config:
+      field: sa.ci-images-mirror.app.ci.config
+      item: build_farm
+    sa.ci-images-mirror.app.ci.token.txt:
+      field: sa.ci-images-mirror.app.ci.token.txt
+      item: build_farm
+  to:
+  - cluster: app.ci
+    name: ci-images-mirror
+    namespace: ci
+- from:
+    .dockerconfigjson:
+      dockerconfigJSON:
+      - auth_field: token_multi-arch-builder-controller_multi01_reg_auth_value.txt
+        item: build_farm
+        registry_url: registry.multi-build01.arm-build.devcluster.openshift.com
+  to:
+  - cluster: multi01
+    name: multi-arch-builder-controller-multi01-registry-credentials
+    namespace: ci
+    type: kubernetes.io/dockerconfigjson
+- from:
+    .dockerconfigjson:
+      dockerconfigJSON:
+      - auth_field: token_image-puller_vsphere02_reg_auth_value.txt
+        item: build_farm
+        registry_url: image-registry.openshift-image-registry.svc.cluster.local:5000
+      - auth_field: token_image-puller_vsphere02_reg_auth_value.txt
+        item: build_farm
+        registry_url: image-registry.openshift-image-registry.svc:5000
+      - auth_field: token_image-puller_vsphere02_reg_auth_value.txt
+        item: build_farm
+        registry_url: registry.apps.build02.vmc.ci.openshift.org
+      - auth_field: token_image-pusher_app.ci_reg_auth_value.txt
+        item: build_farm
+        registry_url: registry.ci.openshift.org
+      - auth_field: auth
+        item: quay-io-push-credentials
+        registry_url: quay.io/openshift/ci
+  to:
+  - cluster: vsphere02
+    name: registry-push-credentials-ci-central
+    namespace: ci
+    type: kubernetes.io/dockerconfigjson
+  - cluster: vsphere02
+    name: registry-push-credentials-ci-central
+    namespace: test-credentials
+    type: kubernetes.io/dockerconfigjson
+- from:
+    .dockerconfigjson:
+      dockerconfigJSON:
+      - auth_field: token_image-puller_vsphere02_reg_auth_value.txt
+        item: build_farm
+        registry_url: image-registry.openshift-image-registry.svc.cluster.local:5000
+      - auth_field: token_image-puller_vsphere02_reg_auth_value.txt
+        item: build_farm
+        registry_url: image-registry.openshift-image-registry.svc:5000
+      - auth_field: token_image-puller_vsphere02_reg_auth_value.txt
+        item: build_farm
+        registry_url: registry.apps.build02.vmc.ci.openshift.org
+      - auth_field: token_image-puller_app.ci_reg_auth_value.txt
+        item: build_farm
+        registry_url: registry.ci.openshift.org
+      - auth_field: auth
+        email_field: email
+        item: quay.io-pull-secret
+        registry_url: quay.io
+  to:
+  - cluster: vsphere02
+    name: registry-pull-credentials
+    namespace: ci
+    type: kubernetes.io/dockerconfigjson
+  - cluster: vsphere02
+    name: registry-pull-credentials
+    namespace: test-credentials
+    type: kubernetes.io/dockerconfigjson
+- from:
+    kubeconfig:
+      field: sa.ci-operator.vsphere02.config
+      item: build_farm
+    sa.ci-operator.vsphere02.token.txt:
+      field: sa.ci-operator.vsphere02.token.txt
+      item: build_farm
+  to:
+  - cluster: vsphere02
+    name: ci-operator
+    namespace: test-credentials
 user_secrets_target_clusters:
 - app.ci
 - arm01
@@ -5007,4 +5091,5 @@ user_secrets_target_clusters:
 - hive
 - multi01
 - vsphere
+- vsphere02
 vault_dptp_prefix: dptp
